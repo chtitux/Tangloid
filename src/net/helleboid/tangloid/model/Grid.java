@@ -1,5 +1,8 @@
 package net.helleboid.tangloid.model;
 
+import java.util.ArrayList;
+import java.util.List;
+
 
 public class Grid {
 
@@ -7,11 +10,14 @@ public class Grid {
 	private int width, height;
 	private String dico;
 	
+	private List<Letter> currentPath;
+	
 	public Grid(int w, int h) {
 		this.width = w;
 		this.height = h;
 		this.dico = "ABCDED";
 		this.letters = new Letter[width][height];
+		this.currentPath = new ArrayList<Letter>();
 		
 		generateNewGrid();
 	}
@@ -47,5 +53,44 @@ public class Grid {
 
 	public Letter getLetter(int x, int y) {
 		return letters[x][y];
+	}
+
+
+	public boolean isValidNewLetter(Letter letter) {
+		// The letter must be not-cliked and its position not more far than 1
+		if(letter.isClicked()) {
+			return false;
+		}
+		// If the current path is empty, the click is OK
+		if(currentPath.size() == 0)
+			return true;
+		
+		Letter lastLetter = currentPath.get(currentPath.size() - 1);
+		if(Math.abs(letter.getPosx() - lastLetter.getPosx()) <= 1
+			&& 
+			Math.abs(letter.getPosy() - lastLetter.getPosy()) <= 1) {
+			return true;
+		}
+		
+		return false;
+	}
+
+
+	public boolean isValidWord() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+
+	public void validateWord() {
+		// TODO Auto-generated method stub
+		
+	}
+
+
+	public void clickOn(Letter letter) {
+		currentPath.add(letter);
+		letter.setClicked(true);
+		
 	}
 }
