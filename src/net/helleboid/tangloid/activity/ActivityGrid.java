@@ -1,13 +1,15 @@
-package net.helleboid.tangloid;
+package net.helleboid.tangloid.activity;
 
 import android.app.Activity;
 import android.os.Bundle;
 
-public class TangloidActivity extends Activity {
+public class ActivityGrid extends Activity {
+	
     /** Called when the activity is first created. */
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.main);
+        
     }
+
 }
