@@ -3,7 +3,7 @@ package net.helleboid.tangloid.model;
 
 public class Grid {
 
-	private String[][] letters;
+	private Letter[][] letters;
 	private int width, height;
 	private String dico;
 	
@@ -11,7 +11,7 @@ public class Grid {
 		this.width = w;
 		this.height = h;
 		this.dico = "ABCDED";
-		this.letters = new String[width][height];
+		this.letters = new Letter[width][height];
 		
 		generateNewGrid();
 	}
@@ -20,7 +20,7 @@ public class Grid {
 	public void generateNewGrid() {
 		for(int x = 0; x < width; x++) {
 			for(int y = 0; y < height; y++) {
-				letters[x][y] = x+","+y;
+				letters[x][y] = new Letter(x+","+y, x, y);
 			}
 		}
 	}
@@ -30,7 +30,7 @@ public class Grid {
 	}
 
 
-	public String[][] getLetters() {
+	public Letter[][] getLetters() {
 		return letters;
 	}
 
@@ -45,7 +45,7 @@ public class Grid {
 	}
 
 
-	public String getLetter(int x, int y) {
+	public Letter getLetter(int x, int y) {
 		return letters[x][y];
 	}
 }

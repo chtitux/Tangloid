@@ -21,7 +21,7 @@ public class TangloidActivity extends Activity {
 			
 			public void onClick(View v)
 			{
-				Intent intent = new Intent(TangloidActivity.this, ActivityGrid.class);
+				Intent intent = new Intent(TangloidActivity.this, GridActivity.class);
 				startActivity(intent);
 			}
 		});
