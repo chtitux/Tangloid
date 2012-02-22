@@ -1,4 +1,4 @@
-package net.helleboid.tangloid.activity;
+package net.tangloid.activity;
 
 import net.helleboid.tangloid.R;
 import android.app.Activity;

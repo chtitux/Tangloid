@@ -1,13 +1,10 @@
-package net.helleboid.tangloid.activity;
-
-import java.util.ArrayList;
-import java.util.List;
+package net.tangloid.activity;
 
 import net.helleboid.tangloid.R;
-import net.helleboid.tangloid.model.Grid;
-import net.helleboid.tangloid.model.Letter;
-import net.helleboid.tangloid.view.GridView;
-import android.app.Activity;
+import net.tangloid.model.Dictionary;
+import net.tangloid.model.Grid;
+import net.tangloid.model.Letter;
+import net.tangloid.view.GridView;
 import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -63,15 +60,15 @@ public class GridActivity extends AbstractGridActivity {
 				// Word is OK
 				// Add the points and clear the currentPath
 				grid.validateWord();
-				Toast t = Toast.makeText(this, "Mot validé !", 2);
+				Toast t = Toast.makeText(this, "Mot validé !", Toast.LENGTH_SHORT);
 				t.show();
 			} else {
 				// Click invalid and word being validated
-				Toast t = Toast.makeText(this, "Mot invalide !", 2);
+				Toast t = Toast.makeText(this, "Mot invalide !", Toast.LENGTH_SHORT);
 				t.show();
 			}
 		} else {
-			Toast t = Toast.makeText(this, "Clic invalide!", 2);
+			Toast t = Toast.makeText(this, "Clic invalide!", Toast.LENGTH_SHORT);
 			t.show();
 		}
 		

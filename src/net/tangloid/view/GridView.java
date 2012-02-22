@@ -1,7 +1,7 @@
-package net.helleboid.tangloid.view;
+package net.tangloid.view;
 
-import net.helleboid.tangloid.activity.AbstractGridActivity;
-import net.helleboid.tangloid.model.Grid;
+import net.tangloid.activity.AbstractGridActivity;
+import net.tangloid.model.Grid;
 import android.content.Context;
 import android.view.Gravity;
 import android.widget.TableLayout;

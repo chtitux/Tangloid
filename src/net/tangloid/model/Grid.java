@@ -1,7 +1,8 @@
-package net.helleboid.tangloid.model;
+package net.tangloid.model;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 import android.os.Bundle;
 
@@ -10,33 +11,38 @@ public class Grid {
 
 	private Letter[][] letters;
 	private int width, height;
-	private String dico;
+	private Dictionary dico;
 	
 	private List<Letter> currentPath;
+	private ArrayList<String> availableLetters;
 	
 	public Grid(int w, int h) {
 		this.width = w;
 		this.height = h;
-		this.dico = "ABCDED";
+		this.dico = new Dictionary();
+
 		this.letters = new Letter[width][height];
 		this.currentPath = new ArrayList<Letter>();
-		
+		this.availableLetters = new ArrayList<String>();
+
+		this.availableLetters.add("A");
+		this.availableLetters.add("B");
+		this.availableLetters.add("C");
+		this.availableLetters.add("D");
+		this.availableLetters.add("E");
+		this.availableLetters.add("F");
 		generateNewGrid();
 	}
 	
 
 	public void generateNewGrid() {
+		Random r = new Random();
 		for(int x = 0; x < width; x++) {
 			for(int y = 0; y < height; y++) {
-				letters[x][y] = new Letter(x+","+y, x, y);
+				letters[x][y] = new Letter(this.availableLetters.get(r.nextInt(this.availableLetters.size() - 1)), x, y);
 			}
 		}
 	}
-	
-	public boolean isWordExists(String word) {
-		return (dico.indexOf(word) > -1);
-	}
-
 
 	public Letter[][] getLetters() {
 		return letters;
@@ -76,11 +82,22 @@ public class Grid {
 		
 		return false;
 	}
-
-
+	
 	public boolean isValidWord() {
-		// TODO Auto-generated method stub
-		return true ;
+		return isValidWord(getCurrentWord());
+	}
+	
+	private String getCurrentWord() {
+		StringBuilder word = new StringBuilder();
+		for(Letter letter : currentPath) {
+			word.append(letter.getLetter());
+		}
+		return word.toString();
+	}
+
+
+	public boolean isValidWord(String word) {
+		return dico.isValidWord(word);
 	}
 
 

@@ -1,7 +1,7 @@
-package net.helleboid.tangloid.activity;
+package net.tangloid.activity;
 
 import android.app.Activity;
-import net.helleboid.tangloid.model.Letter;
+import net.tangloid.model.Letter;
 
 public abstract class AbstractGridActivity extends Activity {
 	

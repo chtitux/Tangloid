@@ -1,7 +1,7 @@
-package net.helleboid.tangloid.model;
+package net.tangloid.model;
 
 import android.graphics.Color;
-import net.helleboid.tangloid.view.LetterView;
+import net.tangloid.view.LetterView;
 
 public class Letter {
 	
