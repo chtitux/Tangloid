@@ -18,10 +18,10 @@ public class LetterView extends TextView {
 		super.setGravity(Gravity.CENTER);
 		super.setTextSize(20);
 		
-		super.setPadding(4, 4, 4, 4);
+		super.setPadding(24, 24, 24, 24);
 		
 		super.setText(letter.getLetter());
-		
+		super.setTag(letter);
 		letter.setView(this);
 		
 		addListeners();

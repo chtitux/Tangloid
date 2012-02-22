@@ -15,9 +15,7 @@ public class GridView extends TableLayout {
 		super(context);
 		this.grid = grid;
 		this.context = context;
-		
-		super.setStretchAllColumns(true);
-		
+				
 		// The table is list of lines,
 		// so iteration on lines first
 		TableRow tableRow;

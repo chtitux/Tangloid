@@ -3,6 +3,8 @@ package net.helleboid.tangloid.model;
 import java.util.ArrayList;
 import java.util.List;
 
+import android.os.Bundle;
+
 
 public class Grid {
 
@@ -78,7 +80,7 @@ public class Grid {
 
 	public boolean isValidWord() {
 		// TODO Auto-generated method stub
-		return false;
+		return true ;
 	}
 
 
@@ -92,5 +94,27 @@ public class Grid {
 		currentPath.add(letter);
 		letter.setClicked(true);
 		
+	}
+
+
+	public boolean isLastLetter(Letter letter) {
+		if(currentPath.size() == 0)
+			return false;
+		
+		return currentPath.get(currentPath.size() - 1).equals(letter);
+	}
+
+
+	public void deleteLastLetter() {
+		if(currentPath.size() == 0)
+			return;
+		
+		Letter lastLetter = currentPath.remove(currentPath.size() - 1);
+		lastLetter.setClicked(false);
+	}
+
+
+	public List<Letter> getCurrentPath() {
+		return currentPath;
 	}
 }

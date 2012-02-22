@@ -41,7 +41,7 @@ public class Letter {
 		if(clicked) {
 			view.setBackgroundColor(Color.RED);
 		} else {
-			view.setBackgroundColor(Color.WHITE);
+			view.setBackgroundColor(Color.TRANSPARENT);
 		}
 		
 	}
