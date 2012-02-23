@@ -4,6 +4,7 @@ import net.tangloid.R;
 import net.tangloid.model.Dictionary;
 import net.tangloid.model.Grid;
 import net.tangloid.model.Letter;
+import net.tangloid.tasks.CheckWordAsyncTask;
 import net.tangloid.view.GridView;
 import android.content.Intent;
 import android.os.Bundle;
@@ -91,7 +92,13 @@ public class GridActivity extends AbstractGridActivity {
 	private void valideWord() {
 		progressBar.setVisibility(View.VISIBLE);
 		validateButton.setVisibility(View.GONE);
-		if(grid.isValidWord()) {
+		CheckWordAsyncTask checkTask = new CheckWordAsyncTask(this);
+		checkTask.execute(grid.getCurrentWord());
+	}
+
+	@Override
+	public void resultForWord(Boolean result) {
+		if(result) {
 			// Word is OK
 			// Add the points and clear the currentPath
 			grid.validateWord();
@@ -103,7 +110,9 @@ public class GridActivity extends AbstractGridActivity {
 			Toast t = Toast.makeText(this, "Mot invalide !", Toast.LENGTH_SHORT);
 			t.show();
 		}
+		
 		progressBar.setVisibility(View.GONE);
 		validateButton.setVisibility(View.VISIBLE);
+		
 	}
 }

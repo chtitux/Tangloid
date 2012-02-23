@@ -1,6 +1,7 @@
 package net.tangloid.util;
 
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
@@ -15,12 +16,12 @@ public class ResLoader {
 	public static boolean isWordExists(Context context, String language, String word) {
 		try {
 			AssetManager am = context.getAssets();
-			String filename = "words-"+ language + ".list";
+			String filename = "words-"+ language + ".png";
 			Log.i("Dico", "file : "+filename);
 
 			AssetFileDescriptor fd = am.openFd(filename);
 			if(fd == null)
-				throw new IOException("fis null");
+				throw new IOException("fd null");
 			
 			BufferedReader buf = new BufferedReader(new FileReader(fd.getFileDescriptor()));
 			String line;
@@ -29,7 +30,6 @@ public class ResLoader {
 				if(line.equals(word)) {
 					return true;
 				}
-				Log.d("Dico", "line read : "+line);
 			}
 		} catch (IOException e) {
 			e.printStackTrace();

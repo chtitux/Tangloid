@@ -128,7 +128,7 @@ public class Grid {
 		return isValidWord(getCurrentWord());
 	}
 	
-	private String getCurrentWord() {
+	public String getCurrentWord() {
 		StringBuilder word = new StringBuilder();
 		for(Letter letter : currentPath) {
 			word.append(letter.getLetter());
