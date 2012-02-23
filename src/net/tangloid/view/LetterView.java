@@ -8,6 +8,8 @@ import android.view.View;
 import android.widget.TextView;
 
 public class LetterView extends TextView {
+	private static final int PADDING = 35;
+	
 	private AbstractGridActivity context;
 	private Letter letter;
 	
@@ -18,7 +20,7 @@ public class LetterView extends TextView {
 		super.setGravity(Gravity.CENTER);
 		super.setTextSize(20);
 		
-		super.setPadding(24, 24, 24, 24);
+		super.setPadding(PADDING, PADDING, PADDING, PADDING);
 		
 		super.setText(letter.getLetter());
 		super.setTag(letter);

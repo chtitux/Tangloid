@@ -1,8 +1,12 @@
 package net.tangloid.model;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Random;
+import java.util.Vector;
 
 import android.os.Bundle;
 
@@ -14,7 +18,8 @@ public class Grid {
 	private Dictionary dico;
 	
 	private List<Letter> currentPath;
-	private ArrayList<String> availableLetters;
+	private LinkedHashMap<Integer, String> repartition;
+	private Random random;
 	
 	public Grid(int w, int h) {
 		this.width = w;
@@ -23,26 +28,59 @@ public class Grid {
 
 		this.letters = new Letter[width][height];
 		this.currentPath = new ArrayList<Letter>();
-		this.availableLetters = new ArrayList<String>();
-
-		this.availableLetters.add("A");
-		this.availableLetters.add("B");
-		this.availableLetters.add("C");
-		this.availableLetters.add("D");
-		this.availableLetters.add("E");
-		this.availableLetters.add("F");
+		this.repartition = new LinkedHashMap<Integer, String>();
+		this.random = new Random();
+		// See doc/repartition.xls , data from http://fr.wikipedia.org/wiki/Fr%C3%A9quence_d'apparition_des_lettres_en_fran%C3%A7ais
+		repartition.put(16, "E");
+		repartition.put(24, "S");
+		repartition.put(32, "A");
+		repartition.put(39, "I");
+		repartition.put(46, "T");
+		repartition.put(54, "N");
+		repartition.put(60, "R");
+		repartition.put(66, "U");
+		repartition.put(72, "L");
+		repartition.put(77, "O");
+		repartition.put(81, "D");
+		repartition.put(84, "C");
+		repartition.put(87, "P");
+		repartition.put(90, "M");
+		repartition.put(91, "V");
+		repartition.put(92, "QU");
+		repartition.put(93, "F");
+		repartition.put(94, "B");
+		repartition.put(95, "G");
+		repartition.put(96, "H");
+		repartition.put(97, "J");
+		repartition.put(98, "X");
+		repartition.put(99, "Y");
+		repartition.put(100, "Z");
+		repartition.put(101, "W");
+		repartition.put(102, "K");
+		
 		generateNewGrid();
 	}
 	
 
 	public void generateNewGrid() {
-		Random r = new Random();
 		for(int x = 0; x < width; x++) {
 			for(int y = 0; y < height; y++) {
-				letters[x][y] = new Letter(this.availableLetters.get(r.nextInt(this.availableLetters.size() - 1)), x, y);
+				letters[x][y] = new Letter(this.getNewLetter(), x, y);
 			}
 		}
 	}
+
+	protected String getNewLetter() {
+		int r = random.nextInt(103);
+		for(Map.Entry<Integer, String> entry : repartition.entrySet()) {
+			if(r <= entry.getKey()) {
+				//System.out.println(((Integer) repartition.elementAt(i+1)).intValue()+"< "+random );
+				return (String) entry.getValue();
+			}
+		}
+		return "#";
+	}
+
 
 	public Letter[][] getLetters() {
 		return letters;
@@ -92,7 +130,8 @@ public class Grid {
 		for(Letter letter : currentPath) {
 			word.append(letter.getLetter());
 		}
-		return word.toString();
+		return word.toString()
+				;
 	}
 
 
