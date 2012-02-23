@@ -1,34 +1,35 @@
 package net.tangloid.util;
 
-import java.io.BufferedInputStream;
-import java.io.BufferedOutputStream;
+import java.io.BufferedReader;
 import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
+import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.Scanner;
-import java.util.regex.MatchResult;
-import java.util.zip.ZipEntry;
-import java.util.zip.ZipInputStream;
-
-import net.helleboid.tangloid.R;
-
 import android.content.Context;
+import android.content.res.AssetFileDescriptor;
 import android.content.res.AssetManager;
+import android.util.Log;
 
 public class ResLoader {
 	
 	public static boolean isWordExists(Context context, String language, String word) {
 		try {
 			AssetManager am = context.getAssets();
-			InputStream fis = am.open("words-"+ language + ".list");
-			if(fis == null)
+			String filename = "words-"+ language + ".list";
+			Log.i("Dico", "file : "+filename);
+
+			AssetFileDescriptor fd = am.openFd(filename);
+			if(fd == null)
 				throw new IOException("fis null");
 			
-			Scanner scan = new Scanner(fis);
-			while(null != scan.findWithinHorizon("(?i)\\b"+word+"\\b", 0)) {
-				MatchResult mr = scan.match();
-				return true;
+			BufferedReader buf = new BufferedReader(new FileReader(fd.getFileDescriptor()));
+			String line;
+			
+			while((line = buf.readLine()) != null) {
+				if(line.equals(word)) {
+					return true;
+				}
+				Log.d("Dico", "line read : "+line);
 			}
 		} catch (IOException e) {
 			e.printStackTrace();

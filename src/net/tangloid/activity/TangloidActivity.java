@@ -1,6 +1,6 @@
 package net.tangloid.activity;
 
-import net.helleboid.tangloid.R;
+import net.tangloid.R;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;

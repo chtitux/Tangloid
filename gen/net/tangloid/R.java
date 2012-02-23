@@ -5,7 +5,7 @@
  * should not be modified by hand.
  */
 
-package net.helleboid.tangloid;
+package net.tangloid;
 
 public final class R {
     public static final class attr {

@@ -1,6 +1,6 @@
 package net.tangloid.activity;
 
-import net.helleboid.tangloid.R;
+import net.tangloid.R;
 import net.tangloid.model.Dictionary;
 import net.tangloid.model.Grid;
 import net.tangloid.model.Letter;
