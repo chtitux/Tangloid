@@ -12,11 +12,14 @@ import android.view.View.OnClickListener;
 import android.view.View.OnLongClickListener;
 import android.widget.Button;
 import android.widget.LinearLayout;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 public class GridActivity extends AbstractGridActivity {
 	
 	private Grid grid;
+	private ProgressBar progressBar;
+	private Button validateButton;
 	
     /** Called when the activity is first created. */
     @Override
@@ -24,13 +27,15 @@ public class GridActivity extends AbstractGridActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.layout_grid);
         
-        grid = new Grid(4, 4);
+        grid = new Grid(this, 4, 4);
         
         GridView gridLayout = new GridView(this, grid);
 
         Button deleteButton = ((Button) findViewById(R.id.layout_grid_deleteButton));
-        Button validateButton = ((Button) findViewById(R.id.layout_grid_validateButton));
+        validateButton = ((Button) findViewById(R.id.layout_grid_validateButton));
         Button restartButton = ((Button) findViewById(R.id.layout_grid_restartButton));
+        progressBar = ((ProgressBar) findViewById(R.id.layout_grid_progressBar));
+        
         deleteButton.setOnClickListener(new OnClickListener() {
 			public void onClick(View v) {
 				grid.deleteLastLetter();
@@ -39,9 +44,7 @@ public class GridActivity extends AbstractGridActivity {
         deleteButton.setOnLongClickListener(new OnLongClickListener() {
 			
 			public boolean onLongClick(View v) {
-				while(grid.getCurrentPath().size() > 0) {
-					grid.deleteLastLetter();
-				}
+				clearWord();
 				return true;
 			}
 		});
@@ -65,6 +68,12 @@ public class GridActivity extends AbstractGridActivity {
         
     }
 
+	protected void clearWord() {
+		while(grid.getCurrentPath().size() > 0) {
+			grid.deleteLastLetter();
+		}		
+	}
+
 	public void clickOn(Letter letter) {
 		
 		if(grid.isValidNewLetter(letter)) {
@@ -80,10 +89,13 @@ public class GridActivity extends AbstractGridActivity {
 		
 	}
 	private void valideWord() {
+		progressBar.setVisibility(View.VISIBLE);
+		validateButton.setVisibility(View.GONE);
 		if(grid.isValidWord()) {
 			// Word is OK
 			// Add the points and clear the currentPath
 			grid.validateWord();
+			clearWord();
 			Toast t = Toast.makeText(this, "Mot validé !", Toast.LENGTH_SHORT);
 			t.show();
 		} else {
@@ -91,5 +103,7 @@ public class GridActivity extends AbstractGridActivity {
 			Toast t = Toast.makeText(this, "Mot invalide !", Toast.LENGTH_SHORT);
 			t.show();
 		}
+		progressBar.setVisibility(View.GONE);
+		validateButton.setVisibility(View.VISIBLE);
 	}
 }

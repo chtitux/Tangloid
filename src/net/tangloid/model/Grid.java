@@ -8,6 +8,7 @@ import java.util.Map;
 import java.util.Random;
 import java.util.Vector;
 
+import android.content.Context;
 import android.os.Bundle;
 
 
@@ -16,15 +17,17 @@ public class Grid {
 	private Letter[][] letters;
 	private int width, height;
 	private Dictionary dico;
+	private Context context;
 	
 	private List<Letter> currentPath;
 	private LinkedHashMap<Integer, String> repartition;
 	private Random random;
 	
-	public Grid(int w, int h) {
+	public Grid(Context context, int w, int h) {
 		this.width = w;
 		this.height = h;
-		this.dico = new Dictionary();
+		this.context = context;
+		this.dico = new Dictionary(context);
 
 		this.letters = new Letter[width][height];
 		this.currentPath = new ArrayList<Letter>();
