@@ -8,6 +8,8 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.Reader;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import android.content.Context;
 import android.content.res.AssetFileDescriptor;
@@ -18,6 +20,30 @@ public class ResLoader {
 
 	public static boolean isWordExists(Context context, String dictionaryFilename,
 			String word) {
+		try {
+			String dicoContent = readFileAsString(context, dictionaryFilename);
+			String patternString = "^"+word+"$";
+			Pattern pattern = Pattern.compile(patternString, Pattern.UNIX_LINES);
+			Matcher matcher = pattern.matcher(dicoContent);
+			if(matcher.find()) {
+				Log.i("ResLoader-is WordExists", "pattern trouvé");
+				return true;
+			} else {
+				Log.i("ResLoader-is WordExists", "pattern '"+patternString+"' non trouvé dans "+dicoContent.length());
+
+				return false;
+			}
+			
+		} catch (IOException e) {
+			e.printStackTrace();
+			return false;
+
+		}
+	}
+		
+		
+/*	public static boolean isWordExists(Context context, String dictionaryFilename,
+				String word) {
 		try {
 			AssetManager am = context.getAssets();
 			Log.i("ResLoader-is WordExists", "Fichier dico : " + dictionaryFilename);
@@ -41,7 +67,7 @@ public class ResLoader {
 		return false;
 
 	}
-
+*/
 
 	public static String readFileAsString(Context context, String filePath)
 			throws java.io.IOException {
