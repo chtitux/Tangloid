@@ -7,7 +7,9 @@ mkdir -p $DIR
 
 cd $DIR
 echo -n "Splitting dico in multiple files... "
+# cat ../../words/words | awk 'BEGIN { i=0; wordsByFile = 5000 } { i++; print "^"$1"$" > int(i/wordsByFile) ".txt.png" }'
 cat ../../words/words | awk 'BEGIN { i=0; wordsByFile = 5000 } { i++; print $1 > int(i/wordsByFile) ".txt.png" }'
+
 echo "done"
 
 echo "Generating new tree.json"

@@ -23,7 +23,7 @@ public class ResLoader {
 		try {
 			String dicoContent = readFileAsString(context, dictionaryFilename);
 			String patternString = "^"+word+"$";
-			Pattern pattern = Pattern.compile(patternString, Pattern.UNIX_LINES);
+			Pattern pattern = Pattern.compile(patternString, Pattern.UNIX_LINES | Pattern.MULTILINE);
 			Matcher matcher = pattern.matcher(dicoContent);
 			if(matcher.find()) {
 				Log.i("ResLoader-is WordExists", "pattern trouvé");
