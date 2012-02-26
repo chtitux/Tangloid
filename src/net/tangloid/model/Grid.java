@@ -16,7 +16,6 @@ public class Grid {
 
 	private Letter[][] letters;
 	private int width, height;
-	private Dictionary dico;
 	private Context context;
 	
 	private List<Letter> currentPath;
@@ -27,7 +26,6 @@ public class Grid {
 		this.width = w;
 		this.height = h;
 		this.context = context;
-		this.dico = new Dictionary(context);
 
 		this.letters = new Letter[width][height];
 		this.currentPath = new ArrayList<Letter>();
@@ -124,23 +122,15 @@ public class Grid {
 		return false;
 	}
 	
-	public boolean isValidWord() {
-		return isValidWord(getCurrentWord());
-	}
 	
 	public String getCurrentWord() {
 		StringBuilder word = new StringBuilder();
 		for(Letter letter : currentPath) {
 			word.append(letter.getLetter());
 		}
-		return word.toString()
-				;
+		return word.toString();
 	}
 
-
-	public boolean isValidWord(String word) {
-		return dico.isValidWord(word);
-	}
 
 
 	public void validateWord() {

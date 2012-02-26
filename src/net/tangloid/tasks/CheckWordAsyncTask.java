@@ -1,6 +1,7 @@
 package net.tangloid.tasks;
 
 import net.tangloid.activity.AbstractGridActivity;
+import net.tangloid.model.Dictionary;
 import net.tangloid.util.ResLoader;
 import android.content.Context;
 import android.os.AsyncTask;
@@ -18,7 +19,7 @@ public class CheckWordAsyncTask extends AsyncTask<String, Integer, Boolean> {
 		if(params == null || params.length == 0)
 			return false;
 		
-		return ResLoader.isWordExists(context, "fr", params[0]);
+		return Dictionary.getInstance(context).isValidWord(context, params[0]);
 	}
 	
 	@Override

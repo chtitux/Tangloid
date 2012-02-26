@@ -12,33 +12,56 @@
         android:orientation="vertical" >
     </LinearLayout>
 
-    <Button
-        android:id="@+id/layout_grid.deleteButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:text="Delete" />
+    <LinearLayout
+        android:id="@+id/linearLayout1"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content" >
 
-    <ProgressBar
-        android:id="@+id/layout_grid.progressBar"
-        style="?android:attr/progressBarStyleLarge"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:visibility="gone" />
+        <Button
+            android:id="@+id/layout_grid.validateButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Validate" />
 
-    <Button
-        android:id="@+id/layout_grid.validateButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:text="Validate" />
+        <ProgressBar
+            android:id="@+id/layout_grid.searchProgressBar"
+            style="?android:attr/progressBarStyleLarge"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:visibility="gone" />
 
-    <Button
-        android:id="@+id/layout_grid.restartButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:text="Restart" />
+        <Button
+            android:id="@+id/layout_grid.deleteButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Delete" />
+
+        <Button
+            android:id="@+id/layout_grid.restartButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Restart" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/linearLayout1"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content" >
+
+        <TextView
+            android:id="@+id/layout_grid.timeTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="2:30"
+            android:paddingRight="5dp" 
+            android:paddingLeft="5dp" />
+
+        <ProgressBar
+            android:id="@+id/layout_grid.timeProgressBar"
+            style="?android:attr/progressBarStyleHorizontal"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
 
 </LinearLayout>

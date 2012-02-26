@@ -6,28 +6,32 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.Reader;
+
 import android.content.Context;
 import android.content.res.AssetFileDescriptor;
 import android.content.res.AssetManager;
 import android.util.Log;
 
 public class ResLoader {
-	
-	public static boolean isWordExists(Context context, String language, String word) {
+
+	public static boolean isWordExists(Context context, String dictionaryFilename,
+			String word) {
 		try {
 			AssetManager am = context.getAssets();
-			String filename = "words-"+ language + ".png";
-			Log.i("Dico", "file : "+filename);
+			Log.i("ResLoader-is WordExists", "Fichier dico : " + dictionaryFilename);
 
-			AssetFileDescriptor fd = am.openFd(filename);
-			if(fd == null)
+			AssetFileDescriptor fd = am.openFd(dictionaryFilename);
+			if (fd == null)
 				throw new IOException("fd null");
-			
-			BufferedReader buf = new BufferedReader(new FileReader(fd.getFileDescriptor()));
+
+			BufferedReader buf = new BufferedReader(new FileReader(
+					fd.getFileDescriptor()));
 			String line;
-			
-			while((line = buf.readLine()) != null) {
-				if(line.equals(word)) {
+
+			while ((line = buf.readLine()) != null) {
+				if (line.equals(word)) {
 					return true;
 				}
 			}
@@ -35,37 +39,29 @@ public class ResLoader {
 			e.printStackTrace();
 		}
 		return false;
-		
+
 	}
-	
-	
 
-	/**
-	 * @param res
-	 * @throws IOException
-	 * @throws FileNotFoundException
-	 * @throws IOException
-	 */
 
-	public static String getDictionary(String language, Context context)
-			throws FileNotFoundException, IOException {
-		final int BUFFER = 8192;
-
-		InputStream fis = context.getAssets().open("words-" + language+".list");
-		;
-		if (fis == null)
-			return "";
-
-		StringBuilder words = new StringBuilder();
-		byte data[] = new byte[BUFFER];
-		int count;
+	public static String readFileAsString(Context context, String filePath)
+			throws java.io.IOException {
+		Log.v("readAsString", "lecture de "+filePath);
 		
-		while((count = fis.read(data, 0, BUFFER)) != -1) {
-			words.append(data);
-		}
+		StringBuilder fileData = new StringBuilder();
 		
-		return words.toString();
-		
+		AssetManager am = context.getAssets();
+		InputStream input = am.open(filePath);
+		Reader reader = new InputStreamReader(input, "UTF-8");
+
+        char[] buf = new char[1024];
+        int numRead=0;
+        while((numRead=reader.read(buf)) != -1){
+            String readData = String.valueOf(buf, 0, numRead);
+            fileData.append(readData);
+        }
+        reader.close();
+        Log.v("readAsString", "lecture terminée, length "+fileData.length());
+        return fileData.toString();
 	}
 
 	/*
